@@ -24,7 +24,7 @@ export function makeSCDriver(options) {
                 socket.on(eventName, this.eventListener);
             },
             stop() {
-                socket.removeListener(eventName, this.eventListener);
+                socket.off(eventName, this.eventListener);
             },
             eventListener: null,
         });
