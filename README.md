@@ -37,5 +37,5 @@ npm install cycle-socketcluster
         DOM: sources.DOM
         Socket: outgoing$
      }
-}, drivers);
+    }, drivers);
 
