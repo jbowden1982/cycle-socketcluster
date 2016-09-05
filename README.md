@@ -1,7 +1,6 @@
 # cycle-socketcluster
 
-## INSTALL
-## npm install cycle-socketcluster
+npm install cycle-socketcluster
 
     import {run} from '@cycle/xstream-run';
     import xs from 'xstream';
