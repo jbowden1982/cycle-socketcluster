@@ -1,6 +1,6 @@
 {
   "name": "cycle-socketcluster",
-  "version": "1.0.0",
+  "version": "1.0.5",
   "description": "",
   "main": "dist",
   "files": [
@@ -18,8 +18,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "./node_modules/.bin/babel src --out-dir dist",
-    "prepublish": "npm run build",
-    "preinstall": "npm run prepublish"
+    "prepublish": "npm run build"
   },
   "repository": {
     "type": "git",

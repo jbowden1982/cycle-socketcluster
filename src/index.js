@@ -14,6 +14,7 @@ import SocketCluster from 'socketcluster-client'
 export function makeSCDriver(options) {
     let socket = SocketCluster.connect(options);
     function get(eventName, { multiArgs = false } = {}) {
+
         return xs.create({
             start(listener) {
                 this.eventListener = multiArgs
@@ -34,10 +35,18 @@ export function makeSCDriver(options) {
     }
 
     return function scDriver(events$) {
-        events$.map(event => publish(event.messageType, event.message));
+        events$.addListener({
+            next: i => {
+                publish(i.messageType, i.message)
+            },
+            error: err => console.error(err),
+            complete: () => {
+                socket.disconnect();
+            }
+        })
         return {
             get,
-            dispose: socket.destroy.bind(socket)
+            dispose: () => {}
         }
     };
 }
