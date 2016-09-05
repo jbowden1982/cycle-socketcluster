@@ -1,26 +1,26 @@
 # cycle-socketcluster
 
-# INSTALL
-# npm install cycle-socketcluster
+## INSTALL
+## npm install cycle-socketcluster
 
-import {run} from '@cycle/xstream-run';
-import xs from 'xstream';
-import {makeDOMDriver} from '@cycle/dom';
-import {makeSCDriver} from 'cycle-socketcluster';
+    import {run} from '@cycle/xstream-run';
+    import xs from 'xstream';
+    import {makeDOMDriver} from '@cycle/dom';
+    import {makeSCDriver} from 'cycle-socketcluster';
+    
+    var main = require('../main').default;
 
-var main = require('../main').default;
+    let drivers = {
+        DOM: makeDOMDriver('body'),
+        Socket: makeSCDriver({
+            // any socketcluster-client options here
+            port: 8000,
+            hostname: localhost
+            ...
+        }),
+    };
 
-let drivers = {
-    DOM: makeDOMDriver('body'),
-    Socket: makeSCDriver({
-        // any socketcluster-client options here
-        port: 8000,
-        hostname: localhost
-        ...
-    }),
-};
-
-run(function (sources) {
+    run(function (sources) {
 
     let incoming$ = sources.Socket.get('incomingEvent').map(e => e.incomingTopSecretData)   
     let outgoing$ = sources.DOM
