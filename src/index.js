@@ -12,7 +12,7 @@ import SocketCluster from 'socketcluster-client'
  * @returns {scDriver}
  */
 export function makeSCDriver(options) {
-    let socket = SocketCluster.connect(options);
+    const socket = SocketCluster.connect(options);
     function get(eventName, { multiArgs = false } = {}) {
 
         return xs.create({
@@ -35,17 +35,20 @@ export function makeSCDriver(options) {
     }
 
     return function scDriver(events$) {
-        events$.addListener({
-            next: i => {
-                publish(i.messageType, i.message)
-            },
-            error: err => console.error(err),
-            complete: () => {
-                socket.disconnect();
-            }
-        })
+        if (events$) {
+            events$.addListener({
+                next: i => {
+                    publish(i.messageType, i.message)
+                },
+                error: err => console.error(err),
+                complete: () => {
+                    socket.disconnect();
+                }
+            })
+        }
         return {
             get,
+            socket: socket,
             dispose: () => {}
         }
     };

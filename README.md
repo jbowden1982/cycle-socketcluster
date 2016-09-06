@@ -1,5 +1,7 @@
 # cycle-socketcluster
 
+# A socketcluster driver for Cycle.js
+
 npm install cycle-socketcluster
 
     import {run} from '@cycle/xstream-run';
